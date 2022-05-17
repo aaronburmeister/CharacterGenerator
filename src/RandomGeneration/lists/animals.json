@@ -1,0 +1,34 @@
+{
+    "animals": [
+        {
+            "name": "Lizard",
+            "Tags": [
+                "Reptile", "Carnivore"
+            ]
+        },
+        {
+            "name": "Cat",
+            "Tags": [
+                "Mammal", "Feline", "Carnivore"
+            ]
+        },
+        {
+            "name": "Dog",
+            "Tags": [
+                "Mammal", "Canine", "Carnivore"
+            ]
+        },
+        {
+            "name": "Dodo",
+            "Tags": [
+                "Extinct", "Bird", "Avian", "Flightless", "Herbivore"
+            ]
+        },
+        {
+            "name": "Crocodile",
+            "Tags": [
+                "Reptile"
+            ]
+        }
+    ]
+}

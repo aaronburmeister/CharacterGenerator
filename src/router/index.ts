@@ -8,7 +8,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      // component: HomeView
+      component: () => import('../views/GenerateCharacterView.vue')
     },
     {
       path: '/about',
@@ -18,11 +19,11 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
-    {
-      path: '/CharGen',
-      name: 'Character Generation',
-      component: () => import('../views/GenerateCharacterView.vue')
-    }
+    // {
+    //   path: '/CharGen',
+    //   name: 'Character Generation',
+    //   component: () => import('../views/GenerateCharacterView.vue')
+    // }
   ]
 })
 

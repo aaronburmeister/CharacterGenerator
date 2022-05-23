@@ -13,7 +13,7 @@ import HelloWorld from '@/components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/CharGen">Generate Character</RouterLink>
+        <!-- <RouterLink to="/CharGen">Generate Character</RouterLink> -->
       </nav>
     </div>
   </header>
@@ -83,19 +83,17 @@ nav a:first-of-type {
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
   }
 
   #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    padding: 2rem;
   }
 
   header {
     display: flex;
     place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    /* padding-right: calc(var(--section-gap) / 2); */
+    padding: 1rem;
   }
 
   header .wrapper {

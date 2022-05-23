@@ -4,7 +4,7 @@ import RandomCharacter from '@/RandomGeneration/RandomCharacter';
 import CongenitalTrait from '@/RandomGeneration/CongenitalTrait';
 
 const genetics = [
-    new CongenitalTrait("Herpes", 1, 3, false, [], "It's Herpes"),
+    new CongenitalTrait("Herpes", 1, 3),
     new CongenitalTrait("Taysachs"),
     new CongenitalTrait("Poor Vision", 1, 3),
     new CongenitalTrait("Diabetes", 17, 200, true, [
@@ -16,7 +16,33 @@ const genetics = [
             name: "Type II",
             odds: 50
         }
-    ], "Blood Sugar issues")
+    ]),
+    new CongenitalTrait("Eye Color", 1, 1, true, [
+        {
+            name: "Brown",
+            odds: 79
+        },
+        {
+            name: "Hazel",
+            odds: 5
+        },
+        {
+            name: "Amber",
+            odds: 5
+        },
+        {
+            name: "Blue",
+            odds: 9
+        },
+        {
+            name: "Gray",
+            odds: 1
+        },
+        {
+            name: "Heterochromia",
+            odds: 1
+        }
+    ])
 ]
 
 let randomCharacter = reactive(new RandomCharacter("Bob"))
@@ -49,4 +75,5 @@ function test() {
 </template>
 
 <style scoped>
+
 </style>

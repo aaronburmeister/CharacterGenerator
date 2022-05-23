@@ -1,23 +1,37 @@
 <script setup lang="ts">
+import { reactive, ref } from 'vue';
 import RandomCharacter from '@/RandomGeneration/RandomCharacter';
 import CongenitalTrait from '@/RandomGeneration/CongenitalTrait';
 
+const genetics = [
+    new CongenitalTrait("Herpes", 1, 3, false, [], "It's Herpes"),
+    new CongenitalTrait("Taysachs"),
+    new CongenitalTrait("Poor Vision", 1, 3),
+    new CongenitalTrait("Diabetes", 17, 200, true, [
+        {
+            name: "Type I",
+            odds: 50
+        },
+        {
+            name: "Type II",
+            odds: 50
+        }
+    ], "Blood Sugar issues")
+]
+
+let randomCharacter = reactive(new RandomCharacter("Bob"))
+let count = ref(0)
+
 function test() {
-    const element = document.querySelector(".chargen")
-    const bob = new RandomCharacter("Bob")
-    bob.traits = [new CongenitalTrait("Herpes", 1, 2, false, {}, "It's herpes")]
+    randomCharacter.traits = []
+    // randomCharacter.name = randomCharacter.name
 
-    let characterP = document.createElement('p')
-    characterP.innerText = bob.name.valueOf()
-
-    let traits = document.createElement('p')
-    traits.style.textAlign = "center"
-    for (let el of bob.traits) {
-        traits.innerText += `${el.name}: ${el.description}` 
+    for (let trait in genetics) {
+        // console.log(genetics[trait])
+        randomCharacter.hasTrait(genetics[trait])
     }
-    
-    characterP.appendChild(traits)
-    element?.appendChild(characterP)
+
+    count.value++
 }
 
 </script>
@@ -26,6 +40,11 @@ function test() {
     <div class="chargen">
         <h1>Ready to Generate a new Character? Start here!</h1>
         <button @click="test">Generate Character</button>
+        <p style="background-color: cornflowerblue; border-style: solid">{{randomCharacter.name}} {{count}}
+            <p v-for="trait in randomCharacter.traits" style="background-color: aliceblue; text-align: center">
+                {{trait.name}}{{trait.hasLevels ? `: ${trait.level}` : null }}
+            </p> 
+        </p>
     </div>
 </template>
 

@@ -1,23 +1,21 @@
 export default class Trait {
-    name: String
-    odds: Number
-    outOf: Number
-    hasLevels: Boolean
-    levels: Object = {}
-    description: String
+    name: string
+    odds: number
+    outOf: number
+    level?: string
+    hasLevels?: boolean
+    levels?: Array<object>
+    description?: string
 
-    constructor(name: String, 
-        odds: Number, 
-        outOf: Number, 
-        hasLevels: Boolean, 
-        levels: Object, 
-        description: String) 
-    {
+    constructor(name: string)
+    constructor(name: string, odds: number, outOf: number)
+    constructor(name: string, odds: number, outOf: number, hasLevels: boolean, levels: Array<object>, description: string)
+    constructor(name: string, odds?: number, outOf?: number, hasLevels?: boolean, levels?: Array<object>, description?: string) {
         this.name = name
-        this.odds = odds
-        this.outOf = outOf
+        this.odds = odds ?? 1
+        this.outOf = outOf ?? 3
         this.hasLevels = hasLevels
-        if (hasLevels) this.levels = levels // e.g. type 1, type 2 diabetes
+        this.levels = levels
         this.description = description
     }
 }

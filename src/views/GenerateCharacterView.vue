@@ -54,7 +54,6 @@ const childhoodPaths = [
 ];
 
 let randomCharacter: RandomCharacter = reactive(new RandomCharacter("Bob", genetics))
-let count = ref(0)
 let earlyChildhood: LifeEvent = reactive(new LifeEvent("Early Childhood", childhoodPaths))
 let characterName= ref("");
 
@@ -62,8 +61,6 @@ function test(): void {
     randomCharacter.reroll(characterName.value, genetics)
     earlyChildhood.reroll("Early Childhood", childhoodPaths)
 }
-
-
 </script>
 
 <template>

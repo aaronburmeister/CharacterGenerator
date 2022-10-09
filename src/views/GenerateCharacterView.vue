@@ -2,6 +2,8 @@
 import { reactive, ref } from 'vue';
 import RandomCharacter from '@/RandomGeneration/RandomCharacter';
 import CongenitalTrait from '@/RandomGeneration/CongenitalTrait';
+import LifeEvent, { possibleOutcome } from '@/RandomGeneration/LifeEvent';
+import Trait from '@/RandomGeneration/Trait';
 
 const genetics = [
     new CongenitalTrait("Herpes", 1, 3),
@@ -44,36 +46,55 @@ const genetics = [
         }
     ])
 ]
+const childhoodPaths = [
+    new possibleOutcome("Active Child", [new Trait("ST+1"), new Trait("FP+1")], 1),
+    new possibleOutcome("Bookish", [new Trait("INT+1")], 1),
+    new possibleOutcome("Wild Child", [new Trait("Per+1"), new Trait("HT+1")], 1),
+    new possibleOutcome("Did Nothing", [], 1)
+];
 
-let randomCharacter = reactive(new RandomCharacter("Bob"))
+let randomCharacter: RandomCharacter = reactive(new RandomCharacter("Bob", genetics))
 let count = ref(0)
+let earlyChildhood: LifeEvent = reactive(new LifeEvent("Early Childhood", childhoodPaths))
+let characterName= ref("");
 
-function test() {
-    randomCharacter.traits = []
-    // randomCharacter.name = randomCharacter.name
-
-    for (let trait in genetics) {
-        // console.log(genetics[trait])
-        randomCharacter.hasTrait(genetics[trait])
-    }
-
-    count.value++
+function test(): void {
+    randomCharacter.reroll(characterName.value, genetics)
+    earlyChildhood.reroll("Early Childhood", childhoodPaths)
 }
+
 
 </script>
 
 <template>
     <div class="chargen">
         <h1>Ready to Generate a new Character? Start here!</h1>
+        <input type="text" v-model="characterName"/>
+        <br/>
         <button @click="test">Generate Character</button>
-        <p style="background-color: cornflowerblue; border-style: solid">{{randomCharacter.name}} {{count}}
-            <p v-for="trait in randomCharacter.traits" style="background-color: aliceblue; text-align: center">
+        <p class="character">
+            {{randomCharacter.name}}
+            <p v-for="trait in randomCharacter.traits" :key="trait.id" class="trait">
                 {{trait.name}}{{trait.hasLevels ? `: ${trait.level}` : null }}
-            </p> 
+            </p>
+            <p>
+                Early Childhood: {{earlyChildhood.outcome.name}}
+                <p v-for="trait in earlyChildhood.outcome.traits" v-bind:key="trait.id" class="trait">
+                    {{trait.name}}
+                </p>
+            </p>
         </p>
     </div>
 </template>
 
 <style scoped>
+.character {
+    background-color: cornflowerblue;
+    border-style: solid
+}
 
+.trait {
+    background-color: aliceblue; 
+    text-align: center
+}
 </style>
